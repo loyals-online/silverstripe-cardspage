@@ -1,0 +1,28 @@
+{
+  "name": "mediaweb/silverstripe-cardspage",
+  "description": "A simple yet configurable cards page",
+  "type": "silverstripe-module",
+  "keywords": [
+    "silverstripe",
+    "cardspage",
+    "cards",
+    "module",
+    "cms"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Jan-Pieter van der Poel",
+      "email": "jp@loyals.nl"
+    }
+  ],
+  "require": {
+    "silverstripe/framework": "~3.4",
+    "silverstripe/display-logic": "dev-master",
+    "mediaweb/silverstripe-tinymce4": "dev-master"
+  },
+  "extra": {
+    "installer-name": "cardspage"
+  },
+  "target-dir": "cardspage"
+}

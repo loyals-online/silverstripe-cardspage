@@ -1,0 +1,23 @@
+nl:
+  CardsPage:
+    SINGULARNAME: 'Kaarten pagina'
+    PLURALNAME: 'Kaarten pagina''s'
+    db_CardsEnabled: 'Kaarten tonen'
+    many_many_Cards: 'Kaarten'
+    PageCards: 'Kaarten'
+    CardsEnabled: 'Kaarten tonen'
+  PageCard:
+    SINGULARNAME: 'Kaart'
+    PLURALNAME: 'Kaarten'
+    db_Name: 'Naam'
+    db_Title: 'Titel'
+    db_SubTitle: 'Subtitel'
+    db_Content: 'Inhoud'
+    db_ButtonText: 'Knop tekst'
+    db_LinkType: 'Link type'
+    db_LinkExternal: 'Link naar externe pagina'
+    db_LinkEmail: 'Link naar email adres'
+    db_LinkTelephone: 'Link naar telefoonnummer'
+    Image: 'Afbeelding'
+    Content: 'Inhoud'
+    has_one_Page: 'Pagina'

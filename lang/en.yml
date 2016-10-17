@@ -1,0 +1,14 @@
+en:
+  PageCard:
+    Page: 'Page'
+    Name: 'Name'
+    Title: 'Title'
+    SubTitle: 'Subtitle'
+    ButtonText: 'Button Text'
+    Image: 'Image'
+    ImageSlides: 'Image Slides'
+    EnableImageSlider: 'Enable Image Slider'
+    LinkInternal: 'Link to internal page'
+    LinkExternal: 'Link to external page'
+    LinkEmail: 'Link to email address'
+    LinkTelephone: 'Link to telephone number'
