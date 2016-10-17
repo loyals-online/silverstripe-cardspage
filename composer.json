@@ -19,7 +19,7 @@
   "require": {
     "silverstripe/framework": "~3.4",
     "silverstripe/display-logic": "dev-master",
-    "mediaweb/silverstripe-tinymce4": "^1.1.x-dev"
+    "mediaweb/silverstripe-tinymce4": "1.1.*"
   },
   "extra": {
     "installer-name": "cardspage"
