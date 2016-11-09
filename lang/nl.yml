@@ -18,6 +18,7 @@ nl:
     db_LinkExternal: 'Link naar externe pagina'
     db_LinkEmail: 'Link naar email adres'
     db_LinkTelephone: 'Link naar telefoonnummer'
-    Image: 'Afbeelding'
+    Image: 'Achtergrond Afbeelding'
+    ContentImage: 'Voorgrond Afbeelding'
     Content: 'Inhoud'
     has_one_Page: 'Pagina'

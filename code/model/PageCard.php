@@ -16,6 +16,7 @@ class PageCard extends DataObject
         'Name'          => 'Varchar(255)',
         'Title'         => 'Varchar(255)',
         'SubTitle'      => 'Varchar(255)',
+        'ContentType'   => 'Enum("Text,Image","Text")',
         'Content'       => 'CustomHTMLText',
         'SimpleContent' => 'Text',
         'LinkType'      => 'Enum("None,Internal,External,Email,Telephone","None")',
@@ -26,8 +27,9 @@ class PageCard extends DataObject
     ];
 
     private static $has_one = [
-        'Image' => 'Image',
-        'Page'  => 'Page',
+        'Image'        => 'Image',
+        'ContentImage' => 'Image',
+        'Page'         => 'Page',
     ];
 
     public static $summary_fields = [
@@ -41,6 +43,7 @@ class PageCard extends DataObject
         $fields->removeByName([
             'LinkExternal',
             'Content',
+            'ContentImage',
             'SimpleContent',
             'Image',
             'PageID',
@@ -60,10 +63,44 @@ class PageCard extends DataObject
             'Title',
             'SubTitle',
             'Image',
+            'ContentType',
             'LinkType',
             'Content',
             'SimpleContent',
         ]);
+
+        $fields->insertAfter(
+            CompositeField::create(
+                DisplayLogicWrapper::create(
+                    UploadField::create('ContentImage', _t('PageCard.ContentImage', 'Foreground Image'))
+                        ->setFolderName('pagecard-images')
+                        ->setDisplayFolderName('pagecard-images')
+                )
+                ->displayIf('ContentType')
+                ->isEqualTo('Image')
+                ->end(),
+                DisplayLogicWrapper::create(
+                    DisplayLogicWrapper::create(
+                        CustomHtmlEditorField::create('Content', _t('PageCard.Content', 'Content'))
+                            ->setRows(10)
+                    )
+                        ->displayIf('LinkType')
+                        ->isEqualTo('None')
+                        ->end(),
+                    DisplayLogicWrapper::create(
+                        TextareaField::create('SimpleContent', _t('PageCard.Content', 'Content'))
+                            ->setRows(15)
+                    )
+                        ->displayIf('LinkType')
+                        ->isNotEqualTo('None')
+                        ->end()
+                )
+                    ->displayIf('ContentType')
+                    ->isEqualTo('Text')
+                    ->end()
+            ),
+            'ContentType'
+        );
 
         $fields->insertAfter(
             CompositeField::create(
@@ -96,41 +133,28 @@ class PageCard extends DataObject
                 )
                     ->displayIf('LinkType')
                     ->isEqualTo('Telephone')
-                    ->end(),
-                DisplayLogicWrapper::create(
-                    CustomHtmlEditorField::create('Content', _t('PageCard.Content', 'Content'))
-                        ->setRows(10)
-                )
-                    ->displayIf('LinkType')
-                    ->isEqualTo('None')
-                    ->end(),
-                DisplayLogicWrapper::create(
-                    TextareaField::create('SimpleContent', _t('PageCard.Content', 'Content'))
-                        ->setRows(15)
-                )
-                    ->displayIf('LinkType')
-                    ->isNotEqualTo('None')
                     ->end()
             ),
             'LinkType'
         );
-
         return $fields;
     }
 
-    public function getDataLink(){
-        switch ($this->LinkType){
+    public function getDataLink()
+    {
+        switch ($this->LinkType) {
             case 'Internal':
-                return $this->Page()->Link();
+                return $this->Page()
+                    ->Link();
                 break;
             case 'External':
                 return $this->LinkExternal;
                 break;
             case 'Email':
-                return 'mailto:'.$this->LinkEmail;
+                return 'mailto:' . $this->LinkEmail;
                 break;
             case 'Telephone':
-                return 'tel:'.$this->LinkTelephone;
+                return 'tel:' . $this->LinkTelephone;
                 break;
         }
     }

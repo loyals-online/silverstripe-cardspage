@@ -5,7 +5,7 @@ en:
     Title: 'Title'
     SubTitle: 'Subtitle'
     ButtonText: 'Button Text'
-    Image: 'Image'
+    Image: 'Background Image'
     ImageSlides: 'Image Slides'
     EnableImageSlider: 'Enable Image Slider'
     LinkInternal: 'Link to internal page'

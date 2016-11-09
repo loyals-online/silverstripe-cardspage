@@ -11,14 +11,18 @@
                     <% if $Image %>
                         <%-- Check link type and apply link if set--%>
                         <div <% if $LinkType != 'None' %>data-link="$getDataLink"<% end_if %>>
-                            <img src="$Image.FocusFill(350,450).URL"/>
+                            <img src="$Image.FocusFill(450,350).URL"/>
                             <% if $Title %><h2>$Title</h2><% end_if %>
                             <% if $SubTitle %><h3>$SubTitle</h3><% end_if %>
-                            <%-- Get proper content field based on type of link--%>
-                            <% if $LinkType = 'None' %>
-                                <% if $Content %>$Content<% end_if %>
+                            <%-- Get proper content field based on type of link & content --%>
+                            <% if $ContentType = 'Text' %>
+                                <% if $LinkType = 'None' %>
+                                    <% if $Content %>$Content<% end_if %>
+                                <% else %>
+                                    <% if $SimpleContent %><p>$SimpleContent</p><% end_if %>
+                                <% end_if %>
                             <% else %>
-                                <% if $SimpleContent %><p>$SimpleContent</p><% end_if %>
+                                <img src="$ContentImage.Pad(350,250).URL"/>
                             <% end_if %>
                         </div>
                     <% end_if %>
