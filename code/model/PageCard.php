@@ -137,6 +137,9 @@ class PageCard extends DataObject
             ),
             'LinkType'
         );
+
+        $this->extends('modifyCMSFields');
+
         return $fields;
     }
 
