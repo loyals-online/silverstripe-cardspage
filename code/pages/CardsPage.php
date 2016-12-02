@@ -33,7 +33,7 @@ class CardsPage extends Page
                 ->sort('SortOrder ASC'), $config),
         ]);
 
-        $this->extend('modifyCMSFields');
+        $this->extend('modifyCMSFields', $fields);
 
         return $fields;
     }
