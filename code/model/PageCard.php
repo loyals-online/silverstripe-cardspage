@@ -103,7 +103,7 @@ class PageCard extends DataObject
         );
 
         $fields->insertAfter(
-            CompositeField::create(
+            DisplayLogicWrapper::create(
                 DisplayLogicWrapper::create(
                     TreeDropdownField::create(
                         'PageID',
@@ -134,7 +134,8 @@ class PageCard extends DataObject
                     ->displayIf('LinkType')
                     ->isEqualTo('Telephone')
                     ->end()
-            ),
+            )
+                ->setName('ContentWrapper'),
             'LinkType'
         );
 
