@@ -70,15 +70,15 @@ class PageCard extends DataObject
         ]);
 
         $fields->insertAfter(
-            CompositeField::create(
+            DisplayLogicWrapper::create(
                 DisplayLogicWrapper::create(
                     UploadField::create('ContentImage', _t('PageCard.ContentImage', 'Foreground Image'))
                         ->setFolderName('pagecard-images')
                         ->setDisplayFolderName('pagecard-images')
                 )
-                ->displayIf('ContentType')
-                ->isEqualTo('Image')
-                ->end(),
+                    ->displayIf('ContentType')
+                    ->isEqualTo('Image')
+                    ->end(),
                 DisplayLogicWrapper::create(
                     DisplayLogicWrapper::create(
                         CustomHtmlEditorField::create('Content', _t('PageCard.Content', 'Content'))
@@ -98,7 +98,8 @@ class PageCard extends DataObject
                     ->displayIf('ContentType')
                     ->isEqualTo('Text')
                     ->end()
-            ),
+            )
+                ->setName('ContentWrapper'),
             'ContentType'
         );
 
@@ -135,7 +136,7 @@ class PageCard extends DataObject
                     ->isEqualTo('Telephone')
                     ->end()
             )
-                ->setName('ContentWrapper'),
+                ->setName('LinkWrapper'),
             'LinkType'
         );
 
