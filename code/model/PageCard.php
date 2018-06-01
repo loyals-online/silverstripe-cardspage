@@ -36,6 +36,42 @@ class PageCard extends DataObject
         'Name' => 'Name',
     ];
 
+    /**
+     * @param null $member
+     *
+     * @return bool|int
+     */
+    public function canView($member = null) {
+        return Permission::check('CMS_ACCESS', 'any', $member);
+    }
+
+    /**
+     * @param null $member
+     *
+     * @return bool|int
+     */
+    public function canEdit($member = null) {
+        return Permission::check('CMS_ACCESS', 'any', $member);
+    }
+
+    /**
+     * @param null $member
+     *
+     * @return bool|int
+     */
+    public function canDelete($member = null) {
+        return Permission::check('CMS_ACCESS', 'any', $member);
+    }
+
+    /**
+     * @param null $member
+     *
+     * @return bool|int
+     */
+    public function canCreate($member = null) {
+        return Permission::check('CMS_ACCESS', 'any', $member);
+    }
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
