@@ -1,7 +1,7 @@
 {
   "name": "mediaweb/silverstripe-cardspage",
   "description": "A simple yet configurable cards page",
-  "type": "silverstripe-module",
+  "type": "silverstripe-vendormodule",
   "keywords": [
     "silverstripe",
     "cardspage",
@@ -14,15 +14,20 @@
     {
       "name": "Jan-Pieter van der Poel",
       "email": "jp@loyals.nl"
+    },
+    {
+      "name": "Gabrijel Gavranović",
+      "email": "gabrijel@gavro.nl"
     }
   ],
   "require": {
-    "silverstripe/framework": "~3.4",
-    "silverstripe/display-logic": "1.5.*",
-    "mediaweb/silverstripe-tinymce4": "1.1.*"
+    "php": "^7.4 || ^8.0",
+    "silverstripe/framework": "4.*",
+    "silverstripe/display-logic": "2.*"
   },
-  "extra": {
-    "installer-name": "cardspage"
-  },
-  "target-dir": "cardspage"
+  "autoload": {
+    "psr-4": {
+      "Loyals\\CardsPage\\": "src/"
+    }
+  }
 }

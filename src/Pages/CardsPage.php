@@ -1,10 +1,19 @@
 <?php
 
+namespace Loyals\CardsPage\Pages;
+
+use Loyals\CardsPage\Controllers\CardsPageController;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\GridField\GridField;
+
 class CardsPage extends Page
 {
-
-    static $singular_name = 'Cards Page';
-    static $plural_name = 'Cards Pages';
+    private static $singular_name = 'Cards Page';
+    private static $plural_name = 'Cards Pages';
 
     private static $db = [
         'CardsEnabled' => 'Boolean',
@@ -29,23 +38,16 @@ class CardsPage extends Page
 
         $fields->addFieldsToTab("Root.Cards", [
             FieldGroup::create(CheckboxField::create('CardsEnabled', ''))->setTitle(_t('CardsPage.CardsEnabled', 'Enable Cards')),
-            GridField::create('Cards', _t('CardsPage.PageCards', 'Page Cards'), $this->owner->Cards()
-                ->sort('SortOrder ASC'), $config),
+            GridField::create('Cards', _t('CardsPage.PageCards', 'Page Cards'), $this->Cards()->sort('SortOrder ASC'), $config),
         ]);
 
         $this->extend('modifyCMSFields', $fields);
 
         return $fields;
     }
-}
 
-/**
- * Class CardsPage_Controller
- *
- * @property CardsPage dataRecord
- * @method CardsPage data()
- * @mixin CardsPage dataRecord
- */
-class CardsPage_Controller extends Page_Controller
-{
+    public function getControllerName()
+    {
+        return CardsPageController::class;
+    }
 }

@@ -1,5 +1,16 @@
 <?php
 
+namespace Loyals\CardsPage\Model;
+
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Permission;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\TreeDropdownField;
+use UncleCheese\DisplayLogic\Forms\Wrapper;
+
 /**
  * Created by PhpStorm.
  * User: jpvanderpoel
@@ -8,16 +19,15 @@
  */
 class PageCard extends DataObject
 {
+    private static $singular_name = 'Page Card';
+    private static $plural_name = 'Page Cards';
 
-    static $singular_name = 'Page Card';
-    static $plural_name   = 'Page Cards';
-
-    static $db = [
+    private static $db = [
         'Name'          => 'Varchar(255)',
         'Title'         => 'Varchar(255)',
         'SubTitle'      => 'Varchar(255)',
         'ContentType'   => 'Enum("Text,Image","Text")',
-        'Content'       => 'CustomHTMLText',
+        'Content'       => 'HTMLText',
         'SimpleContent' => 'Text',
         'LinkType'      => 'Enum("None,Internal,External,Email,Telephone","None")',
         'LinkExternal'  => 'Varchar(255)',
@@ -32,7 +42,7 @@ class PageCard extends DataObject
         'Page'         => 'Page',
     ];
 
-    public static $summary_fields = [
+    private static $summary_fields = [
         'Name' => 'Name',
     ];
 
@@ -41,7 +51,8 @@ class PageCard extends DataObject
      *
      * @return bool|int
      */
-    public function canView($member = null) {
+    public function canView($member = null)
+    {
         return Permission::check('CMS_ACCESS', 'any', $member);
     }
 
@@ -50,7 +61,8 @@ class PageCard extends DataObject
      *
      * @return bool|int
      */
-    public function canEdit($member = null) {
+    public function canEdit($member = null)
+    {
         return Permission::check('CMS_ACCESS', 'any', $member);
     }
 
@@ -59,7 +71,8 @@ class PageCard extends DataObject
      *
      * @return bool|int
      */
-    public function canDelete($member = null) {
+    public function canDelete($member = null)
+    {
         return Permission::check('CMS_ACCESS', 'any', $member);
     }
 
@@ -68,7 +81,8 @@ class PageCard extends DataObject
      *
      * @return bool|int
      */
-    public function canCreate($member = null) {
+    public function canCreate($member = null)
+    {
         return Permission::check('CMS_ACCESS', 'any', $member);
     }
 
@@ -106,8 +120,8 @@ class PageCard extends DataObject
         ]);
 
         $fields->insertAfter(
-            DisplayLogicWrapper::create(
-                DisplayLogicWrapper::create(
+            Wrapper::create(
+                Wrapper::create(
                     UploadField::create('ContentImage', _t('PageCard.ContentImage', 'Foreground Image'))
                         ->setFolderName('pagecard-images')
                         ->setDisplayFolderName('pagecard-images')
@@ -115,15 +129,15 @@ class PageCard extends DataObject
                     ->displayIf('ContentType')
                     ->isEqualTo('Image')
                     ->end(),
-                DisplayLogicWrapper::create(
-                    DisplayLogicWrapper::create(
-                        CustomHtmlEditorField::create('Content', _t('PageCard.Content', 'Content'))
+                Wrapper::create(
+                    Wrapper::create(
+                        HtmlEditorField::create('Content', _t('PageCard.Content', 'Content'))
                             ->setRows(10)
                     )
                         ->displayIf('LinkType')
                         ->isEqualTo('None')
                         ->end(),
-                    DisplayLogicWrapper::create(
+                    Wrapper::create(
                         TextareaField::create('SimpleContent', _t('PageCard.Content', 'Content'))
                             ->setRows(15)
                     )
@@ -140,8 +154,8 @@ class PageCard extends DataObject
         );
 
         $fields->insertAfter(
-            DisplayLogicWrapper::create(
-                DisplayLogicWrapper::create(
+            Wrapper::create(
+                Wrapper::create(
                     TreeDropdownField::create(
                         'PageID',
                         _t('PageCard.LinkInternal', 'Link to internal page'),
@@ -153,19 +167,19 @@ class PageCard extends DataObject
                     ->displayIf('LinkType')
                     ->isEqualTo('Internal')
                     ->end(),
-                DisplayLogicWrapper::create(
+                Wrapper::create(
                     TextField::create('LinkExternal', _t('PageCard.LinkExternal', 'Link to external page'))
                 )
                     ->displayIf('LinkType')
                     ->isEqualTo('External')
                     ->end(),
-                DisplayLogicWrapper::create(
+                Wrapper::create(
                     TextField::create('LinkEmail', _t('PageCard.LinkEmail', 'Link to email address'))
                 )
                     ->displayIf('LinkType')
                     ->isEqualTo('Email')
                     ->end(),
-                DisplayLogicWrapper::create(
+                Wrapper::create(
                     TextField::create('LinkTelephone', _t('PageCard.LinkTelephone', 'Link to telephone number'))
                 )
                     ->displayIf('LinkType')
@@ -185,18 +199,13 @@ class PageCard extends DataObject
     {
         switch ($this->LinkType) {
             case 'Internal':
-                return $this->Page()
-                    ->Link();
-                break;
+                return $this->Page()->Link();
             case 'External':
                 return $this->LinkExternal;
-                break;
             case 'Email':
                 return 'mailto:' . $this->LinkEmail;
-                break;
             case 'Telephone':
                 return 'tel:' . $this->LinkTelephone;
-                break;
         }
     }
 }

@@ -1,0 +1,4 @@
+mappings:
+  PageCard: Loyals\CardsPage\Model\PageCard
+  CardsPage: Loyals\CardsPage\Pages\CardsPage
+  CardsPage_Controller: Loyals\CardsPage\Controllers\CardsPageController
