@@ -81,7 +81,7 @@ class PageCard extends DataObject
      *
      * @return bool|int
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return Permission::check('CMS_ACCESS', 'any', $member);
     }

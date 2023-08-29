@@ -2,6 +2,7 @@
 
 namespace Loyals\CardsPage\Pages;
 
+use Page;
 use Loyals\CardsPage\Controllers\CardsPageController;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
