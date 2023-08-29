@@ -14,6 +14,7 @@ use SilverStripe\Forms\GridField\GridField;
 
 class CardsPage extends Page
 {
+    private static $table_name = 'CardsPage';
     private static $singular_name = 'Cards Page';
     private static $plural_name = 'Cards Pages';
 

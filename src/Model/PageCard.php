@@ -21,6 +21,7 @@ use UncleCheese\DisplayLogic\Forms\Wrapper;
  */
 class PageCard extends DataObject
 {
+    private static $table_name = 'PageCard';
     private static $singular_name = 'Page Card';
     private static $plural_name = 'Page Cards';
 
