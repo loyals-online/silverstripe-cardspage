@@ -2,7 +2,9 @@
 
 namespace Loyals\CardsPage\Model;
 
+use Page;
 use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Permission;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
@@ -37,9 +39,9 @@ class PageCard extends DataObject
     ];
 
     private static $has_one = [
-        'Image'        => 'Image',
-        'ContentImage' => 'Image',
-        'Page'         => 'Page',
+        'Image'        => Image::class,
+        'ContentImage' => Image::class,
+        'Page'         => Page::class,
     ];
 
     private static $summary_fields = [
