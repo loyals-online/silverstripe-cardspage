@@ -4,6 +4,7 @@ namespace Loyals\CardsPage\Pages;
 
 use Page;
 use Loyals\CardsPage\Controllers\CardsPageController;
+use Loyals\CardsPage\Model\PageCard;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
@@ -21,7 +22,7 @@ class CardsPage extends Page
     ];
 
     private static $many_many = [
-        'Cards' => 'PageCard',
+        'Cards' => PageCard::class
     ];
 
     private static $many_many_extraFields = [
