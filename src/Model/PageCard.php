@@ -5,6 +5,7 @@ namespace Loyals\CardsPage\Model;
 use Page;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Permission;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
@@ -160,7 +161,7 @@ class PageCard extends DataObject
                     TreeDropdownField::create(
                         'PageID',
                         _t('PageCard.LinkInternal', 'Link to internal page'),
-                        'SiteTree',
+                        SiteTree::class,
                         'ID',
                         'MenuTitle'
                     )
