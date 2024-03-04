@@ -106,8 +106,7 @@ class PageCard extends DataObject
 
         $fields->insertAfter(
             UploadField::create('Image', _t('PageCard.Image', 'Image'))
-                ->setFolderName('pagecard-images')
-                ->setDisplayFolderName('pagecard-images'),
+                ->setFolderName('pagecard-images'),
             'SubTitle'
         );
 
@@ -127,7 +126,6 @@ class PageCard extends DataObject
                 Wrapper::create(
                     UploadField::create('ContentImage', _t('PageCard.ContentImage', 'Foreground Image'))
                         ->setFolderName('pagecard-images')
-                        ->setDisplayFolderName('pagecard-images')
                 )
                     ->displayIf('ContentType')
                     ->isEqualTo('Image')
